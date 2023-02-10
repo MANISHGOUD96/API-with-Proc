@@ -1,0 +1,480 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="APISTROModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Emp_Adress">
+          <Key>
+            <PropertyRef Name="AdressId" />
+          </Key>
+          <Property Name="AdressId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdressCode" Type="varchar" MaxLength="10" />
+          <Property Name="Building" Type="varchar" MaxLength="40" />
+          <Property Name="ZipCode" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="login">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MasterDept">
+          <Key>
+            <PropertyRef Name="DepMId" />
+          </Key>
+          <Property Name="DepMId" Type="int" Nullable="false" />
+          <Property Name="DepCode" Type="varchar" MaxLength="20" />
+          <Property Name="DepName" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="newEmp">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="AdressId" Type="int" />
+          <Property Name="Email" Type="varchar" MaxLength="20" />
+          <Property Name="MobileNo" Type="varchar" MaxLength="12" />
+          <Property Name="DepMId" Type="int" />
+        </EntityType>
+        <Association Name="FK__newEmp__AdressId__3A81B327">
+          <End Role="Emp_Adress" Type="Self.Emp_Adress" Multiplicity="0..1" />
+          <End Role="newEmp" Type="Self.newEmp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Emp_Adress">
+              <PropertyRef Name="AdressId" />
+            </Principal>
+            <Dependent Role="newEmp">
+              <PropertyRef Name="AdressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__newEmp__DepMId__3B75D760">
+          <End Role="MasterDept" Type="Self.MasterDept" Multiplicity="0..1" />
+          <End Role="newEmp" Type="Self.newEmp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterDept">
+              <PropertyRef Name="DepMId" />
+            </Principal>
+            <Dependent Role="newEmp">
+              <PropertyRef Name="DepMId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="DeleteData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DetAllData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetAllData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllDataa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetDataThrowId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetDataWithId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="insertloginval" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="InsertValue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AdressCode" Type="varchar" Mode="In" />
+          <Parameter Name="Building" Type="varchar" Mode="In" />
+          <Parameter Name="ZipCode" Type="varchar" Mode="In" />
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="MobileNo" Type="varchar" Mode="In" />
+          <Parameter Name="DepCode" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="updatedata" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="MobileNo" Type="varchar" Mode="In" />
+          <Parameter Name="AdressCode" Type="varchar" Mode="In" />
+          <Parameter Name="Building" Type="varchar" Mode="In" />
+          <Parameter Name="ZipCode" Type="varchar" Mode="In" />
+          <Parameter Name="DepMId" Type="int" Mode="In" />
+          <Parameter Name="DepCode" Type="varchar" Mode="In" />
+          <Parameter Name="DepName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="userlogien" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="APISTROModelStoreContainer">
+          <EntitySet Name="Emp_Adress" EntityType="Self.Emp_Adress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="login" EntityType="Self.login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MasterDept" EntityType="Self.MasterDept" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="newEmp" EntityType="Self.newEmp" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__newEmp__AdressId__3A81B327" Association="Self.FK__newEmp__AdressId__3A81B327">
+            <End Role="Emp_Adress" EntitySet="Emp_Adress" />
+            <End Role="newEmp" EntitySet="newEmp" />
+          </AssociationSet>
+          <AssociationSet Name="FK__newEmp__DepMId__3B75D760" Association="Self.FK__newEmp__DepMId__3B75D760">
+            <End Role="MasterDept" EntitySet="MasterDept" />
+            <End Role="newEmp" EntitySet="newEmp" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="APISTROModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Emp_Adress">
+          <Key>
+            <PropertyRef Name="AdressId" />
+          </Key>
+          <Property Name="AdressId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdressCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Building" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="newEmps" Relationship="Self.FK__newEmp__AdressId__3A81B327" FromRole="Emp_Adress" ToRole="newEmp" />
+        </EntityType>
+        <EntityType Name="MasterDept">
+          <Key>
+            <PropertyRef Name="DepMId" />
+          </Key>
+          <Property Name="DepMId" Type="Int32" Nullable="false" />
+          <Property Name="DepCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DepName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="newEmps" Relationship="Self.FK__newEmp__DepMId__3B75D760" FromRole="MasterDept" ToRole="newEmp" />
+        </EntityType>
+        <EntityType Name="newEmp">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AdressId" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="DepMId" Type="Int32" />
+          <NavigationProperty Name="Emp_Adress" Relationship="Self.FK__newEmp__AdressId__3A81B327" FromRole="newEmp" ToRole="Emp_Adress" />
+          <NavigationProperty Name="MasterDept" Relationship="Self.FK__newEmp__DepMId__3B75D760" FromRole="newEmp" ToRole="MasterDept" />
+        </EntityType>
+        <Association Name="FK__newEmp__AdressId__3A81B327">
+          <End Role="Emp_Adress" Type="Self.Emp_Adress" Multiplicity="0..1" />
+          <End Role="newEmp" Type="Self.newEmp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Emp_Adress">
+              <PropertyRef Name="AdressId" />
+            </Principal>
+            <Dependent Role="newEmp">
+              <PropertyRef Name="AdressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__newEmp__DepMId__3B75D760">
+          <End Role="MasterDept" Type="Self.MasterDept" Multiplicity="0..1" />
+          <End Role="newEmp" Type="Self.newEmp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterDept">
+              <PropertyRef Name="DepMId" />
+            </Principal>
+            <Dependent Role="newEmp">
+              <PropertyRef Name="DepMId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="APISTROEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Emp_Adress" EntityType="Self.Emp_Adress" />
+          <EntitySet Name="MasterDepts" EntityType="Self.MasterDept" />
+          <EntitySet Name="newEmps" EntityType="Self.newEmp" />
+          <AssociationSet Name="FK__newEmp__AdressId__3A81B327" Association="Self.FK__newEmp__AdressId__3A81B327">
+            <End Role="Emp_Adress" EntitySet="Emp_Adress" />
+            <End Role="newEmp" EntitySet="newEmps" />
+          </AssociationSet>
+          <AssociationSet Name="FK__newEmp__DepMId__3B75D760" Association="Self.FK__newEmp__DepMId__3B75D760">
+            <End Role="MasterDept" EntitySet="MasterDepts" />
+            <End Role="newEmp" EntitySet="newEmps" />
+          </AssociationSet>
+          <FunctionImport Name="DeleteData">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllData" ReturnType="Collection(APISTROModel.GetAllData_Result)" />
+          <FunctionImport Name="InsertValue">
+            <Parameter Name="AdressCode" Mode="In" Type="String" />
+            <Parameter Name="Building" Mode="In" Type="String" />
+            <Parameter Name="ZipCode" Mode="In" Type="String" />
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="MobileNo" Mode="In" Type="String" />
+            <Parameter Name="DepCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="updatedata">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="MobileNo" Mode="In" Type="String" />
+            <Parameter Name="AdressCode" Mode="In" Type="String" />
+            <Parameter Name="Building" Mode="In" Type="String" />
+            <Parameter Name="ZipCode" Mode="In" Type="String" />
+            <Parameter Name="DepMId" Mode="In" Type="Int32" />
+            <Parameter Name="DepCode" Mode="In" Type="String" />
+            <Parameter Name="DepName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DetAllData" ReturnType="Collection(APISTROModel.DetAllData_Result)">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetDataWithId" ReturnType="Collection(APISTROModel.GetDataWithId_Result)">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetDataThrowId" ReturnType="Collection(APISTROModel.GetDataThrowId_Result)">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllDataa" ReturnType="Collection(APISTROModel.GetAllDataa_Result)" />
+          <EntitySet Name="logins" EntityType="APISTROModel.login" />
+          <FunctionImport Name="userlogien" ReturnType="Collection(APISTROModel.userlogien_Result)">
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="insertloginval">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetAllData_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="MobileNo" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="AdressCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Building" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="ZipCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="DepCode" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="DepName" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="DetAllData_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="MobileNo" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="AdressCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Building" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="ZipCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="DepCode" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="DepName" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="GetDataWithId_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="MobileNo" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="AdressCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Building" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="ZipCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="DepCode" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="DepName" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="GetDataThrowId_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="MobileNo" Nullable="true" MaxLength="12" />
+          <Property Type="Int32" Name="AdressId" Nullable="false" />
+          <Property Type="String" Name="AdressCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Building" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="ZipCode" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="DepMId" Nullable="false" />
+          <Property Type="String" Name="DepCode" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="DepName" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="GetAllDataa_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="MobileNo" Nullable="true" MaxLength="12" />
+          <Property Type="Int32" Name="AdressId" Nullable="false" />
+          <Property Type="String" Name="AdressCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Building" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="ZipCode" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="DepMId" Nullable="false" />
+          <Property Type="String" Name="DepCode" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="DepName" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <EntityType Name="login">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="userlogien_Result">
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="APISTROModelStoreContainer" CdmEntityContainer="APISTROEntities1">
+          <EntitySetMapping Name="Emp_Adress">
+            <EntityTypeMapping TypeName="APISTROModel.Emp_Adress">
+              <MappingFragment StoreEntitySet="Emp_Adress">
+                <ScalarProperty Name="AdressId" ColumnName="AdressId" />
+                <ScalarProperty Name="AdressCode" ColumnName="AdressCode" />
+                <ScalarProperty Name="Building" ColumnName="Building" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MasterDepts">
+            <EntityTypeMapping TypeName="APISTROModel.MasterDept">
+              <MappingFragment StoreEntitySet="MasterDept">
+                <ScalarProperty Name="DepMId" ColumnName="DepMId" />
+                <ScalarProperty Name="DepCode" ColumnName="DepCode" />
+                <ScalarProperty Name="DepName" ColumnName="DepName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="newEmps">
+            <EntityTypeMapping TypeName="APISTROModel.newEmp">
+              <MappingFragment StoreEntitySet="newEmp">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AdressId" ColumnName="AdressId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="DepMId" ColumnName="DepMId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DeleteData" FunctionName="APISTROModel.Store.DeleteData" />
+          <FunctionImportMapping FunctionImportName="GetAllData" FunctionName="APISTROModel.Store.GetAllData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="APISTROModel.GetAllData_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="AdressCode" ColumnName="AdressCode" />
+                <ScalarProperty Name="Building" ColumnName="Building" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="DepCode" ColumnName="DepCode" />
+                <ScalarProperty Name="DepName" ColumnName="DepName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertValue" FunctionName="APISTROModel.Store.InsertValue" />
+          <FunctionImportMapping FunctionImportName="updatedata" FunctionName="APISTROModel.Store.updatedata" />
+          <FunctionImportMapping FunctionImportName="DetAllData" FunctionName="APISTROModel.Store.DetAllData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="APISTROModel.DetAllData_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="AdressCode" ColumnName="AdressCode" />
+                <ScalarProperty Name="Building" ColumnName="Building" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="DepCode" ColumnName="DepCode" />
+                <ScalarProperty Name="DepName" ColumnName="DepName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetDataWithId" FunctionName="APISTROModel.Store.GetDataWithId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="APISTROModel.GetDataWithId_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="AdressCode" ColumnName="AdressCode" />
+                <ScalarProperty Name="Building" ColumnName="Building" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="DepCode" ColumnName="DepCode" />
+                <ScalarProperty Name="DepName" ColumnName="DepName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetDataThrowId" FunctionName="APISTROModel.Store.GetDataThrowId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="APISTROModel.GetDataThrowId_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="AdressId" ColumnName="AdressId" />
+                <ScalarProperty Name="AdressCode" ColumnName="AdressCode" />
+                <ScalarProperty Name="Building" ColumnName="Building" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="DepMId" ColumnName="DepMId" />
+                <ScalarProperty Name="DepCode" ColumnName="DepCode" />
+                <ScalarProperty Name="DepName" ColumnName="DepName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllDataa" FunctionName="APISTROModel.Store.GetAllDataa">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="APISTROModel.GetAllDataa_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="AdressId" ColumnName="AdressId" />
+                <ScalarProperty Name="AdressCode" ColumnName="AdressCode" />
+                <ScalarProperty Name="Building" ColumnName="Building" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="DepMId" ColumnName="DepMId" />
+                <ScalarProperty Name="DepCode" ColumnName="DepCode" />
+                <ScalarProperty Name="DepName" ColumnName="DepName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="logins">
+            <EntityTypeMapping TypeName="APISTROModel.login">
+              <MappingFragment StoreEntitySet="login">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="userlogien" FunctionName="APISTROModel.Store.userlogien">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="APISTROModel.userlogien_Result">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="insertloginval" FunctionName="APISTROModel.Store.insertloginval" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
